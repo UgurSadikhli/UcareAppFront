@@ -1029,3 +1029,4 @@
 /Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/refint/UcareAppFront.dll
 /Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/UcareAppFront.pdb
 /Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/ref/UcareAppFront.dll
+/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/UcareAppFront.sourcelink.json
