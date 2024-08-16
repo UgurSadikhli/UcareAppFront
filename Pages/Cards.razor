@@ -4,7 +4,7 @@
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Components.Routing
 @using UcareAppFront.DTOs
-
+@inject IJSRuntime JSRuntime
 <PageTitle>Cards</PageTitle>
 
 <div class="container">
@@ -14,12 +14,12 @@
             @foreach (var card in cards)
             {
                 <div class="col-md-3 mb-4">
-                    <div class="card" @onclick="() => NavigateToDetails(card.Id)">
-                        <img src="@card.ImgPath" class="card-img-top" alt="@card.Name" />
+                    <div class="card" @onclick="() => NavigateToDetails(card.id)">
+                        <img src="@card.imgPath" class="card-img-top" alt="@card.name" />
                         <div class="card-body">
-                            <h5 class="card-title">@card.Name</h5>
-                            <p class="card-text"><i class="bi bi-house-door"></i> @card.Address</p>
-                            <p class="card-text"><i class="bi bi-briefcase"></i> @card.Occupation</p>
+                            <h5 class="card-title">@card.name</h5>
+                            <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
+                            <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
                         </div>
                     </div>
                 </div>
@@ -43,75 +43,75 @@
         {
             new CardDto
             {
-                Id = 1,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "John Doe",
-                Address = "123 Main St",
-                Occupation = "Software Developer",
-                Description = "Experienced developer in ASP.NET Core.",
-                Latitude = 40.7128,
-                Longitude = 74.0060
+                id = 1,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "John Doe",
+                address = "123 Main St",
+                occupation = "Software Developer",
+                description = "Experienced developer in ASP.NET Core.",
+                latitude = 40.7128,
+                longitude = 74.0060
             },
             new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 40.4093,
-                Longitude =49.8671
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 40.4093,
+                longitude =49.8671
             },new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 34.0522,
-                Longitude = -118.2437
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 34.0522,
+                longitude = -118.2437
             },new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 34.0522,
-                Longitude = -118.2437
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 34.0522,
+                longitude = -118.2437
             },new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 34.0522,
-                Longitude = -118.2437
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 34.0522,
+                longitude = -118.2437
             },new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 34.0522,
-                Longitude = -118.2437
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 34.0522,
+                longitude = -118.2437
             },new CardDto
             {
-                Id = 2,
-                ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                Name = "Jane Smith",
-                Address = "456 Elm St",
-                Occupation = "Graphic Designer",
-                Description = "Creative designer with a passion for graphics.",
-                Latitude = 34.0522,
-                Longitude = -118.2437
+                id = 2,
+                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
+                name = "Jane Smith",
+                address = "456 Elm St",
+                occupation = "Graphic Designer",
+                description = "Creative designer with a passion for graphics.",
+                latitude = 34.0522,
+                longitude = -118.2437
             }
             // Add more cards as needed
         };
@@ -119,6 +119,7 @@
 
     private void NavigateToDetails(int id)
     {
+        JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", "from", "cards");
         NavigationManager.NavigateTo($"/card/{id}");
     }
 }
