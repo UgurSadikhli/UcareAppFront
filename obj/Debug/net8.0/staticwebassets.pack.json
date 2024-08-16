@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/css/custom.css",
+      "PackagePath": "staticwebassets/css/custom.css"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
     },

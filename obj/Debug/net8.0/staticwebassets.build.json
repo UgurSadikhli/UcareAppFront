@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fMOB5J26HkhZx4m4OStA92XqEhIDdgiJUotE16q+QYM=",
+  "Hash": "um2oxlX01d5qW37gl5DlV/TDfqsX4iF3hJDB8oNzlDk=",
   "Source": "UcareAppFront",
   "BasePath": "/",
   "Mode": "Root",
@@ -7862,6 +7862,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/css/custom.css",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "css/custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/custom.css"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/favicon.png",

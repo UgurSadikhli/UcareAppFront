@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #021526 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.navbar-brand {
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+
+.nav-link:hover {
+    color: #f0f0f0; 
+}
+
+.nav-scrollable {
+    background: linear-gradient(to top, rgba(2, 21, 38, 0.78), #021526);
+   
+}
