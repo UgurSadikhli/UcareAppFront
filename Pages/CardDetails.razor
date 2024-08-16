@@ -1,0 +1,114 @@
+@page "/card/{Id:int}"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@using UcareAppFront.DTOs
+
+<PageTitle>Card Details</PageTitle>
+
+<div class="container mt-4">
+   <a class="btn btn-light mb-4 border-0" @onclick="GoBack">
+    <i class="bi bi-arrow-left"></i> Back
+</a>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="@card.ImgPath" class="card-img-top img-custom" alt="@card.Name" />
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">@card.Name</h4>
+                        <button class="btn @favoriteButtonClass" @onclick="ToggleFavorite">
+                            <i class="bi @favoriteIcon"></i>
+                        </button>
+                    </div>
+                    <p class="card-text"><i class="bi bi-house-door"></i> @card.Address</p>
+                    <p class="card-text"><i class="bi bi-briefcase"></i> @card.Occupation</p>
+                    <p class="card-text"><i class="bi bi-file-text"></i> @card.Description</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private CardDto card;
+    private bool isFavorite;
+    private string favoriteButtonClass = "btn-outline-primary";
+    private string favoriteIcon = "bi-heart";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Hard-code card data for testing purposes
+        var allCards = new List<CardDto>
+        {
+            new CardDto { Id = 1, ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", Name = "John Doe", Address = "123 Main St", Occupation = "Engineer", Description = "Description for Card 1", Latitude = 40.5569536, Longitude = 49.8106368 },
+            new CardDto { Id = 2, ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", Name = "Jane Smith", Address = "456 Elm St", Occupation = "Artist", Description = "Description for Card 2", Latitude = 40.7128, Longitude = -74.0060 }
+            // Add more hard-coded cards as needed
+        };
+
+        // Find the card with the matching Id
+        card = allCards.FirstOrDefault(c => c.Id == Id);
+
+        // Check if this card is already a favorite
+        if (card != null)
+        {
+            var favorites = await GetFavoriteCards();
+            isFavorite = favorites.Contains(card.Id);
+            UpdateFavoriteButton();
+        }
+    }
+
+    private async Task ToggleFavorite()
+    {
+        var favorites = await GetFavoriteCards();
+        if (isFavorite)
+        {
+            favorites.Remove(card.Id);
+        }
+        else
+        {
+            favorites.Add(card.Id);
+        }
+        await SaveFavoriteCards(favorites);
+        isFavorite = !isFavorite;
+        UpdateFavoriteButton();
+    }
+
+    private async Task<List<int>> GetFavoriteCards()
+    {
+        var favoritesJson = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "favorites");
+        return string.IsNullOrEmpty(favoritesJson) ? new List<int>() : System.Text.Json.JsonSerializer.Deserialize<List<int>>(favoritesJson);
+    }
+
+    private async Task SaveFavoriteCards(List<int> favorites)
+    {
+        var favoritesJson = System.Text.Json.JsonSerializer.Serialize(favorites);
+        await JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", "favorites", favoritesJson);
+    }
+
+    private void UpdateFavoriteButton()
+    {
+        favoriteButtonClass = isFavorite ? "btn-primary" : "btn-outline-primary";
+        favoriteIcon = isFavorite ? "bi-heart-fill" : "bi-heart";
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/cards");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && card != null)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeMap", card.Latitude, card.Longitude, card.Name);
+        }
+    }
+}

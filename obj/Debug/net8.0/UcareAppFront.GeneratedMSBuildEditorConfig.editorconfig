@@ -26,6 +26,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/ugursadixli/Desktop/UcareAppFront/Pages/CardDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FyZERldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ugursadixli/Desktop/UcareAppFront/Pages/Cards.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FyZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ugursadixli/Desktop/UcareAppFront/Pages/FavoriteCards.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmF2b3JpdGVDYXJkcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/ugursadixli/Desktop/UcareAppFront/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

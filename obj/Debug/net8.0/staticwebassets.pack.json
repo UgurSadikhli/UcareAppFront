@@ -37,6 +37,14 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/localStorage.js",
+      "PackagePath": "staticwebassets/localStorage.js"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/sample-data/weather.json",
       "PackagePath": "staticwebassets/sample-data/weather.json"
     },

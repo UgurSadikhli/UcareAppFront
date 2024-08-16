@@ -1,0 +1,88 @@
+@page "/favorite-cards"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@using UcareAppFront.DTOs
+
+<PageTitle>Favorite Cards</PageTitle>
+
+<div class="container">
+    <div class="row">
+        @if (favoriteCards != null && favoriteCards.Any())
+        {
+            @foreach (var card in favoriteCards)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="@card.ImgPath" class="card-img-top" alt="@card.Name" />
+                        <div class="card-body">
+                            <h5 class="card-title">@card.Name</h5>
+                            <p class="card-text"><i class="bi bi-house-door"></i> @card.Address</p>
+                            <p class="card-text"><i class="bi bi-briefcase"></i> @card.Occupation</p>
+                            <button class="btn @favoriteButtonClass" @onclick="() => ToggleFavorite(card.Id)">
+                                <i class="bi @favoriteIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p>No favorite cards found. Let's fix it <a href="cards">home</a></p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<CardDto> allCards; // Replace with your actual data source
+    private List<CardDto> favoriteCards;
+    private bool isFavorite;
+    private string favoriteButtonClass = "btn-outline-primary";
+    private string favoriteIcon = "bi-heart";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load all cards and favorite cards
+        allCards = new List<CardDto>
+        {
+            new CardDto { Id = 1, ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", Name = "John Doe", Address = "123 Main St", Occupation = "Engineer", Description = "Description for Card 1", Latitude = 40.5569536, Longitude = 49.8106368 },
+            new CardDto { Id = 2, ImgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", Name = "Jane Smith", Address = "456 Elm St", Occupation = "Artist", Description = "Description for Card 2", Latitude = 40.7128, Longitude = -74.0060 }
+            // Add more hard-coded cards as needed
+        };
+
+        var favorites = await GetFavoriteCards();
+        favoriteCards = allCards.Where(c => favorites.Contains(c.Id)).ToList();
+    }
+
+    private async Task ToggleFavorite(int cardId)
+    {
+        var favorites = await GetFavoriteCards();
+        if (favorites.Contains(cardId))
+        {
+            favorites.Remove(cardId);
+        }
+        else
+        {
+            favorites.Add(cardId);
+        }
+        await SaveFavoriteCards(favorites);
+        // Update the list of favorite cards
+        favoriteCards = allCards.Where(c => favorites.Contains(c.Id)).ToList();
+    }
+
+    private async Task<List<int>> GetFavoriteCards()
+    {
+        var favoritesJson = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "favorites");
+        return string.IsNullOrEmpty(favoritesJson) ? new List<int>() : System.Text.Json.JsonSerializer.Deserialize<List<int>>(favoritesJson);
+    }
+
+    private async Task SaveFavoriteCards(List<int> favorites)
+    {
+        var favoritesJson = System.Text.Json.JsonSerializer.Serialize(favorites);
+        await JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", "favorites", favoritesJson);
+    }
+}
