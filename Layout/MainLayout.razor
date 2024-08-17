@@ -7,11 +7,13 @@
     </div>
 
     <main style="background-color: #EEEEEE;">
-        <div class="top-row px-4" style="background-color: #EEEEEE; box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);">
-            
+        <div class="top-row px-4" style="background-color: #EEEEEE; box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4); ">
             @if (isAuthenticated)
             {
-                <button class="nav-link btn" @onclick="Logout">Logout</button>
+                <div style="display: flex; justify-content:space-between; height: 100%; width: 100%; align-items: center;">
+                <span>Hi, @userName</span>
+                <button class="nav-link btn" style="color:blue" @onclick="Logout">Logout</button>
+                </div>
             }
             else
             {
@@ -28,16 +30,21 @@
 
 @code {
     private bool isAuthenticated = false;
+    private string userName = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        userName = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "name");
         isAuthenticated = !string.IsNullOrEmpty(token);
     }
 
     private async Task Logout()
     {
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "role");
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "name");
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "email");
         isAuthenticated = false; 
     }
 }

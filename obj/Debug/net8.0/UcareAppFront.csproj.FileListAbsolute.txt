@@ -1040,3 +1040,5 @@
 /Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/Blazored.LocalStorage.dll
 /Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/webcil/Blazored.LocalStorage.wasm
 /Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/compressed/ry25rgz2vf.gz
+/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/package-lock.json
+/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/package.json
