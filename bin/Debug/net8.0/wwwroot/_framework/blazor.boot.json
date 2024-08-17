@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "UcareAppFront",
   "resources": {
-    "hash": "sha256-zc7q0TzPLQRZSMIxd+UfXlHtk9LBX/Y0JJay5+1y8Xk=",
+    "hash": "sha256-9AsW48umpD8xAWjfTLmswm3E7UcKdyD6QcPKjM8am2w=",
     "jsModuleNative": {
       "dotnet.native.8.0.8.8eenwg4bx8.js": "sha256-juC5sA7gHTLXFEhAKgdM2/RavswpwCtDfjYGsAz2FXg="
     },
@@ -210,10 +210,10 @@
       "mscorlib.wasm": "sha256-Gz8PyW2/fwihe5ul81OwmRUrU71r+KtbyRw6xlOGD+Q=",
       "netstandard.wasm": "sha256-jMTqIQzoDS810lyhZpMO5eEC36EzntXqSVn+2qwkOMQ=",
       "System.Private.CoreLib.wasm": "sha256-NFj5WE5VLP2LptZIRJCUIc1AMk06FmxpsSILfPISwAw=",
-      "UcareAppFront.wasm": "sha256-Y4Qdp/vo8CMlIlHcOPBSuqa9B9/uVW/Niwps/eY67fE="
+      "UcareAppFront.wasm": "sha256-5Bu2MqvHvpTDu5C1oCfOFx9motWDDUp4zDp5wu0MjPA="
     },
     "pdb": {
-      "UcareAppFront.pdb": "sha256-H3bgTPofI6gcjJ22Ac+P1UW9ingsU9o0NZhsI2U/ULo="
+      "UcareAppFront.pdb": "sha256-PxhVW3r2qKTnqJKX4mh3lM3iASitN10Qwu2m0NpsMDA="
     }
   },
   "cacheBootResources": true,

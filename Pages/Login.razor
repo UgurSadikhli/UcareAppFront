@@ -44,17 +44,13 @@
 
         if (response.IsSuccessStatusCode)
         {
-            // Read the response content as a JSON object
             var responseData = await response.Content.ReadFromJsonAsync<JsonResponse>();
 
             if (responseData != null)
             {
                 token = responseData.Token;
-
-                // Store the token in local storage
                 await JSRuntime.InvokeVoidAsync("localStorage.setItem", "jwtToken", token);
                 isAuthenticated = true;
-
                 Console.WriteLine("Logged in successfully");
             }
             else

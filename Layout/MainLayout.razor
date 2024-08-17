@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@using Microsoft.AspNetCore.Components.Authorization
-@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <div class="page">
     <div class="sidebar">
@@ -26,18 +25,19 @@
     </main>
 </div>
 
-@code{
-      private bool isAuthenticated = false;
 
-    protected async Task OnInitialized()
+@code {
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
     {
-        @* var token = await localStorage.GetItemAsync<string>("jwtToken"); *@
-        @* isAuthenticated = !string.IsNullOrEmpty(token); *@
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
     }
-    private async Task  Logout()
+
+    private async Task Logout()
     {
-        @* await localStorage.RemoveItemAsync("jwtToken"); *@
-        isAuthenticated = false;
-        NavigationManager.NavigateTo("/login");
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+        isAuthenticated = false; 
     }
 }
