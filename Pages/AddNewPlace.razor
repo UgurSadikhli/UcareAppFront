@@ -1,5 +1,29 @@
 @page "/add-new-place"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
 
 <h3>Add New Place</h3>
 
-<!-- Add New Place form goes here -->
+@if (!isAuthenticated)
+{
+    <p>You need to be logged in to access this page. Redirecting...</p>
+}
+else
+{
+    <!-- Add New Place form goes here -->
+}
+
+@code {
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
+
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/cards");
+        }
+    }
+}
