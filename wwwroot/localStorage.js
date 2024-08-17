@@ -4,5 +4,8 @@ window.localStorageHelper = {
     },
     setItem: function (key, value) {
         localStorage.setItem(key, value);
-    }
+    },
+    removeItem: function (key) {
+        return localStorage.removeItem(key);
+    },
 };

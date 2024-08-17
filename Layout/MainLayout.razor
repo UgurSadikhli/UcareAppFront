@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -6,11 +9,35 @@
 
     <main style="background-color: #EEEEEE;">
         <div class="top-row px-4" style="background-color: #EEEEEE; box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);">
-             <a href="login">Login</a>
-             <a href="register">Register</a>
+            
+            @if (isAuthenticated)
+            {
+                <button class="nav-link btn" @onclick="Logout">Logout</button>
+            }
+            else
+            {
+                 <a href="login">Login</a>
+                 <a href="register">Register</a>
+            }
         </div>
         <article class="content px-4" >
             @Body
         </article>
     </main>
 </div>
+
+@code{
+      private bool isAuthenticated = false;
+
+    protected async Task OnInitialized()
+    {
+        @* var token = await localStorage.GetItemAsync<string>("jwtToken"); *@
+        @* isAuthenticated = !string.IsNullOrEmpty(token); *@
+    }
+    private async Task  Logout()
+    {
+        @* await localStorage.RemoveItemAsync("jwtToken"); *@
+        isAuthenticated = false;
+        NavigationManager.NavigateTo("/login");
+    }
+}

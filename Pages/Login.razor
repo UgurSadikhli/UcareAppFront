@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @using System.Net.Http.Json
 @using UcareAppFront.DTOs
+@inject IJSRuntime JSRuntime
 
 <h3 class="text-center mb-4">Login</h3>
 
@@ -33,21 +34,42 @@
 
 @code {
     private LoginDto loginModel = new LoginDto();
+    private bool isAuthenticated = false;
+    private string token = string.Empty;
 
     private async Task HandleLogin()
     {
-        var apiUrl = "http://localhost:5026/api/Auth/login"; // Verify this URL
+        var apiUrl = "http://localhost:5026/api/Auth/login";
         var response = await Http.PostAsJsonAsync(apiUrl, loginModel);
 
         if (response.IsSuccessStatusCode)
         {
-            Console.WriteLine("Logged in successfully");
-            // Handle successful login, e.g., store JWT token, redirect
+            // Read the response content as a JSON object
+            var responseData = await response.Content.ReadFromJsonAsync<JsonResponse>();
+
+            if (responseData != null)
+            {
+                token = responseData.Token;
+
+                // Store the token in local storage
+                await JSRuntime.InvokeVoidAsync("localStorage.setItem", "jwtToken", token);
+                isAuthenticated = true;
+
+                Console.WriteLine("Logged in successfully");
+            }
+            else
+            {
+                Console.WriteLine("Login failed: No token received");
+            }
         }
         else
         {
             Console.WriteLine("Login failed");
-            // Handle error
         }
+    }
+
+    public class JsonResponse
+    {
+        public string Token { get; set; }
     }
 }

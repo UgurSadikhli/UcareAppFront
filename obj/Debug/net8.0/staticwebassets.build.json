@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "um2oxlX01d5qW37gl5DlV/TDfqsX4iF3hJDB8oNzlDk=",
+  "Hash": "nJQjjNjka24mzwG1YKOzkbAx5ZR+Rzc0rQS2xQbYHZg=",
   "Source": "UcareAppFront",
   "BasePath": "/",
   "Mode": "Root",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/ugursadixli/.nuget/packages/microsoft.aspnetcore.components.webassembly/8.0.8/build/net8.0/blazor.webassembly.js"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Blazored.LocalStorage.wasm",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/webcil/Blazored.LocalStorage.wasm"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/dotnet.js",
@@ -243,6 +262,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/webcil/Microsoft.AspNetCore.Authorization.wasm"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Authorization.wasm",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Authorization.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/webcil/Microsoft.AspNetCore.Components.Authorization.wasm"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Forms.wasm",
@@ -6952,6 +6990,25 @@
       "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/System.Formats.Tar.wasm"
     },
     {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/compressed/ry25rgz2vf.gz",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Blazored.LocalStorage.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Blazored.LocalStorage.wasm"
+    },
+    {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/compressed/s24sx1b0va.gz",
       "SourceId": "UcareAppFront",
       "SourceType": "Computed",
@@ -7254,6 +7311,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Microsoft.Extensions.DependencyInjection.Abstractions.wasm"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/compressed/ucnvc5wltf.gz",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Authorization.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Authorization.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "/Users/ugursadixli/Desktop/UcareAppFront/bin/Debug/net8.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Authorization.wasm"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/obj/Debug/net8.0/compressed/unpocsm7gm.gz",
