@@ -97,12 +97,11 @@ else
                 return;
             }
 
-            // Post the new card data to the API
             var response = await Http.PostAsJsonAsync("http://localhost:5026/api/Card", Card);
             if (response.IsSuccessStatusCode)
             {
                 await JSRuntime.InvokeVoidAsync("showAlert", "Card successfully created!");
-                Navigation.NavigateTo("/cards"); // Redirect after successful creation
+                Navigation.NavigateTo("/cards"); 
             }
             else
             {

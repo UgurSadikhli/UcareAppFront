@@ -65,7 +65,6 @@
             favorites.Add(cardId);
         }
         await SaveFavoriteCards(favorites);
-        // Update the list of favorite cards
         favoriteCards = allCards.Where(c => favorites.Contains(c.id)).ToList();
     }
 

@@ -20,9 +20,16 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="card-title">@card.name</h4>
+                            <div>
+                            @if(isAdmin){
+                               <button class="btn" style="border-color: red; color: red; margin-right: 2px;" @onclick="DeleteCart">
+                                <i class="bi bi-trash-fill"></i>
+                               </button>
+                            }
                             <button class="btn @favoriteButtonClass" @onclick="ToggleFavorite">
                                 <i class="bi @favoriteIcon"></i>
                             </button>
+                            </div>
                         </div>
                         <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
                         <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
@@ -47,11 +54,16 @@
 
     private CardDto card;
     private bool isFavorite;
+    private bool isAdmin =false;
     private string favoriteButtonClass = "btn-outline-primary";
     private string favoriteIcon = "bi-heart";
 
     protected override async Task OnInitializedAsync()
     {
+        var role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
+        if(role=="admin"){
+            isAdmin = true;
+        }
         try
         {
             var response = await Http.GetFromJsonAsync<CardDto>($"http://localhost:5026/api/Card/{Id}");
@@ -110,6 +122,29 @@
         favoriteButtonClass = isFavorite ? "btn-primary" : "btn-outline-primary";
         favoriteIcon = isFavorite ? "bi-heart-fill" : "bi-heart";
     }
+    private async Task DeleteCart()
+    {
+        var itemId = Id; 
+        try
+        {
+            var response = await Http.DeleteAsync($"http://localhost:5026/api/Card/{itemId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+               await JSRuntime.InvokeVoidAsync("showAlert", "Card successfully deleted!");
+               NavigationManager.NavigateTo($"/cards");         
+            }
+            else
+            {
+                Console.WriteLine($"Failed to delete item {itemId}. Status code: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting item {itemId}: {ex.Message}");
+        }
+      
+    }
 
     private async Task GoBack()
     {
@@ -121,15 +156,9 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        @* if (firstRender && card != null)
-        {
-            await JSRuntime.InvokeVoidAsync("initializeMap", card.latitude, card.longitude, card.name);
-        } *@
-
             try{
                 await JSRuntime.InvokeVoidAsync("initializeMap", card.latitude, card.longitude, card.name);
             }
-            
             catch (Exception ex)
             {
                 Console.WriteLine($"Error initializing map: {ex.Message}");

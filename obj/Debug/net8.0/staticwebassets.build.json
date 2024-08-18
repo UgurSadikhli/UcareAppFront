@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5bbrJjDwNPlPSqFnD8lY/fBJsy6Euvc5VTXpx8SX5Dg=",
+  "Hash": "/nix7aJRy+rZdF3zH5cbEQJ/WgukIVNiKp17Ht7iIpU=",
   "Source": "UcareAppFront",
   "BasePath": "/",
   "Mode": "Root",
@@ -8052,6 +8052,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/jwtHelper.js"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/map.js",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "js/map.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/map.js"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/mapHelper.js",

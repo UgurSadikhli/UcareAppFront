@@ -1,0 +1,144 @@
+@page "/update-place/{Id:int}"
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using UcareAppFront.DTOs
+
+@if (isAuthenticated)
+{
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="@Card.imgPath" style="height: 30vh;" alt="@Card.name" />
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="bi bi-person-vcard"></i> Name
+                            </label>
+                            <input type="text" class="form-control" id="name" @bind="Card.name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">
+                                <i class="bi bi-house-door"></i> Address
+                            </label>
+                            <input type="text" class="form-control" id="address" @bind="Card.address" />
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation">
+                                <i class="bi bi-briefcase"></i> Occupation
+                            </label>
+                            <input type="text" class="form-control" id="occupation" @bind="Card.occupation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">
+                                <i class="bi bi-file-text"></i> Description
+                            </label>
+                            <textarea class="form-control" id="description" rows="3" @bind="Card.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="imgUrl">
+                                <i class="bi bi-image"></i> Image URL
+                            </label>
+                            <input type="text" class="form-control" id="imgUrl" @bind="Card.imgPath" />
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" @onclick="UpdatePlaceDetails">Update</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="map" style="height: 100%;"></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>You must be logged in to update a place.</p>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private CardDto Card = new CardDto
+    {
+        latitude = 40,
+        longitude = 49
+    };
+
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
+
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/cards");
+            return;
+        }
+
+
+        try
+        {
+            Card = await Http.GetFromJsonAsync<CardDto>($"http://localhost:5026/api/Card/{Id}");
+            if (Card == null)
+            {
+                Console.WriteLine("Error loading card data.");
+                Navigation.NavigateTo("/cards");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching card data: {ex.Message}");
+        }
+    }
+
+    private async Task UpdatePlaceDetails()
+    {
+        try
+        {
+            var latString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLat");
+            var lngString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLng");
+            double lat = 0;
+            double lng = 0;
+            if (!string.IsNullOrEmpty(latString) && double.TryParse(latString, out lat) &&
+                !string.IsNullOrEmpty(lngString) && double.TryParse(lngString, out lng))
+            {
+                Card.latitude = lat;
+                Card.longitude = lng;
+            }
+
+            var response = await Http.PutAsJsonAsync($"http://localhost:5026/api/Card/{Id}", Card);
+            if (response.IsSuccessStatusCode)
+            {
+                await JSRuntime.InvokeVoidAsync("showAlert", "Card successfully updated!");
+                Navigation.NavigateTo("/cards");
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("showAlert", "Failed to update card.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("UpdateDataMap", Card.latitude, Card.longitude);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error initializing map: {ex.Message}");
+            }
+            
+    }
+}
