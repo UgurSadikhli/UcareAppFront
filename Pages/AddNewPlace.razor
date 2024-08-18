@@ -1,4 +1,4 @@
-@page "/add-new-place"
+@* @page "/add-new-place"
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
 
@@ -25,5 +25,129 @@ else
         {
             Navigation.NavigateTo("/cards");
         }
+    }
+} *@
+
+@page "/add-new-place"
+@inject IJSRuntime JSRuntime
+@using UcareAppFront.DTOs
+@inject NavigationManager Navigation
+
+<h3>Add New Place</h3>
+
+@if (isAuthenticated)
+{
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="@Card.imgPath" class="card-img-top img-custom" alt="@Card.name" />
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="bi bi-building"></i> Name
+                            </label>
+                            <input type="text" class="form-control" id="name" @bind="Card.name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">
+                                <i class="bi bi-house-door"></i> Address
+                            </label>
+                            <input type="text" class="form-control" id="address" @bind="Card.address" />
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation">
+                                <i class="bi bi-briefcase"></i> Occupation
+                            </label>
+                            <input type="text" class="form-control" id="occupation" @bind="Card.occupation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">
+                                <i class="bi bi-file-text"></i> Description
+                            </label>
+                            <textarea class="form-control" id="description" rows="3" @bind="Card.description"></textarea>
+                        </div>
+                        <button class="btn btn-primary" @onclick="CreatePlace">Create</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="map" style="height: 100%;"></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>You must be logged in to add a new place.</p>
+}
+
+@code {
+    private CardDto Card = new CardDto
+    {
+        latitude=40,
+        longitude=49
+    };
+
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
+
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/cards");
+        }
+    }
+
+
+ 
+
+     private async Task CreatePlace()
+    {
+        try
+        {
+            var latString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLat");
+            var lngString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLng");
+            double lat = 0;
+            double lng = 0;
+            if (!string.IsNullOrEmpty(latString) && double.TryParse(latString, out lat) &&
+                !string.IsNullOrEmpty(lngString) && double.TryParse(lngString, out lng))
+            {
+                Card.latitude = lat;
+                Card.longitude = lng;
+            }
+            else
+            {
+                Console.WriteLine("Latitude or Longitude values are not valid.");
+            }
+
+            Console.WriteLine($"Name: {Card.name}");
+            Console.WriteLine($"Address: {Card.address}");
+            Console.WriteLine($"Occupation: {Card.occupation}");
+            Console.WriteLine($"Description: {Card.description}");
+            Console.WriteLine($"Latitude: {Card.latitude}");
+            Console.WriteLine($"Longitude: {Card.longitude}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+    
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("initializeMap2", Card.latitude, Card.longitude);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
+        
     }
 }

@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets/js/jwtHelper.js"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/mapHelper.js",
+      "PackagePath": "staticwebassets/js/mapHelper.js"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
