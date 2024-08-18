@@ -12,9 +12,7 @@ function initializeMap2(latitude, longitude) {
         var lat = e.latlng.lat;
         var lng = e.latlng.lng;
         marker.setLatLng([lat, lng]);
-        marker.bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
 
-        // Save latitude and longitude to localStorage
         localStorage.setItem('mapLat', lat);
         localStorage.setItem('mapLng', lng);
     });

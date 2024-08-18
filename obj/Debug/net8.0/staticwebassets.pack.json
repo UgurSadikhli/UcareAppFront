@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/alert.js",
+      "PackagePath": "staticwebassets/js/alert.js"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/jwtHelper.js",
       "PackagePath": "staticwebassets/js/jwtHelper.js"
     },

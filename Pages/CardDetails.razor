@@ -8,25 +8,32 @@
 <PageTitle>Card Details</PageTitle>
 
 <div class="container mt-4">
-   <a class="btn btn-light mb-4 border-0" style="background-color: transparent;" @onclick="GoBack">
-    <i class="bi bi-arrow-bar-left"></i> Back
-</a>
+    <a class="btn btn-light mb-4 border-0" style="background-color: transparent;" @onclick="GoBack">
+        <i class="bi bi-arrow-bar-left"></i> Back
+    </a>
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
-                <img src="@card.imgPath" class="card-img-top img-custom" alt="@card.name" />
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">@card.name</h4>
-                        <button class="btn @favoriteButtonClass" @onclick="ToggleFavorite">
-                            <i class="bi @favoriteIcon"></i>
-                        </button>
+            @if (card != null)
+            {
+                <div class="card">
+                    <img src="@card.imgPath" class="card-img-top img-custom" alt="@card.name" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">@card.name</h4>
+                            <button class="btn @favoriteButtonClass" @onclick="ToggleFavorite">
+                                <i class="bi @favoriteIcon"></i>
+                            </button>
+                        </div>
+                        <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
+                        <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
+                        <p class="card-text"><i class="bi bi-file-text"></i> @card.description</p>
                     </div>
-                    <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
-                    <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
-                    <p class="card-text"><i class="bi bi-file-text"></i> @card.description</p>
                 </div>
-            </div>
+            }
+            else
+            {
+                <p>Loading...</p>
+            }
         </div>
         <div class="col-md-6">
             <div id="map" style="height: 100%;"></div>
@@ -45,23 +52,28 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Hard-code card data for testing purposes
-        var allCards = new List<CardDto>
+        try
         {
-            new CardDto { id = 1, imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", name = "John Doe", address = "123 Main St", occupation = "Engineer", description = "Description for Card 1", latitude = 40.5569536, longitude = 49.8106368 },
-            new CardDto { id = 2, imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", name = "Jane Smith", address = "456 Elm St", occupation = "Artist", description = "Description for Card 2", latitude = 40.7128, longitude = -74.0060 }
-            // Add more hard-coded cards as needed
-        };
+            var response = await Http.GetFromJsonAsync<CardDto>($"http://localhost:5026/api/Card/{Id}");
 
-        // Find the card with the matching Id
-        card = allCards.FirstOrDefault(c => c.id == Id);
+            if (response != null)
+            {
+                card = response;
 
-        // Check if this card is already a favorite
-        if (card != null)
+
+                var favorites = await GetFavoriteCards();
+                isFavorite = favorites.Contains(card.id);
+                UpdateFavoriteButton();
+            }
+            else
+            {
+
+                Console.WriteLine($"Card with Id {Id} not found.");
+            }
+        }
+        catch (Exception ex)
         {
-            var favorites = await GetFavoriteCards();
-            isFavorite = favorites.Contains(card.id);
-            UpdateFavoriteButton();
+            Console.WriteLine($"Error fetching card data: {ex.Message}");
         }
     }
 
@@ -103,13 +115,24 @@
     {
         var gotoo = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "from");
         NavigationManager.NavigateTo($"/{gotoo}");
+ 
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender && card != null)
+        @* if (firstRender && card != null)
         {
             await JSRuntime.InvokeVoidAsync("initializeMap", card.latitude, card.longitude, card.name);
-        }
+        } *@
+
+            try{
+                await JSRuntime.InvokeVoidAsync("initializeMap", card.latitude, card.longitude, card.name);
+            }
+            
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error initializing map: {ex.Message}");
+            }
     }
 }

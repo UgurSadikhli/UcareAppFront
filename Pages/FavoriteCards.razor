@@ -1,6 +1,7 @@
 @page "/favorite-cards"
 @using System.Net.Http.Json
-@inject HttpClient Http
+@inject HttpClient HttpClient
+
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 @using UcareAppFront.DTOs
@@ -13,16 +14,18 @@
         {
             @foreach (var card in favoriteCards)
             {
-                <div class="col-md-3 mb-4">
-                    <div class="card"  @onclick="() => NavigateToDetails(card.id)">
-                        <img src="@card.imgPath" class="card-img-top" alt="@card.name" />
-                        <div class="card-body">
-                            <h5 class="card-title">@card.name</h5>
-                            <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
-                            <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
-                        </div>
+               <div class="col-md-3 mb-4">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;"  @onclick="() => NavigateToDetails(card.id)">
+                    <img src="@card.imgPath" 
+                         style="object-fit: cover; height: 200px; width: 100%;" 
+                         alt="@card.name" />
+                    <div class="card-body" style="flex: 1;">
+                        <h5 class="card-title" style="font-size: 1.25rem;">@card.name</h5>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-house-door"></i> @card.address</p>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-briefcase"></i> @card.occupation</p>
                     </div>
                 </div>
+            </div>
             }
         }
         else
@@ -44,12 +47,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Load all cards and favorite cards
-        allCards = new List<CardDto>
-        {
-            new CardDto { id = 1, imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", name = "John Doe", address = "123 Main St", occupation = "Engineer", description = "Description for Card 1", latitude = 40.5569536, longitude = 49.8106368 },
-            new CardDto { id = 2, imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s", name = "Jane Smith", address = "456 Elm St", occupation = "Artist", description = "Description for Card 2", latitude = 40.7128, longitude = -74.0060 }
-            // Add more hard-coded cards as needed
-        };
+            allCards = await HttpClient.GetFromJsonAsync<List<CardDto>>("http://localhost:5026/api/Card");
 
         var favorites = await GetFavoriteCards();
         favoriteCards = allCards.Where(c => favorites.Contains(c.id)).ToList();

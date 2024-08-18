@@ -1,6 +1,6 @@
 @page "/cards"
 @using System.Net.Http.Json
-@inject HttpClient Http
+@inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Components.Routing
 @using UcareAppFront.DTOs
@@ -14,15 +14,17 @@
             @foreach (var card in cards)
             {
                 <div class="col-md-3 mb-4">
-                    <div class="card" @onclick="() => NavigateToDetails(card.id)">
-                        <img src="@card.imgPath" class="card-img-top" alt="@card.name" />
-                        <div class="card-body">
-                            <h5 class="card-title">@card.name</h5>
-                            <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
-                            <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
-                        </div>
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;"  @onclick="() => NavigateToDetails(card.id)">
+                    <img src="@card.imgPath" 
+                         style="object-fit: cover; height: 200px; width: 100%;" 
+                         alt="@card.name" />
+                    <div class="card-body" style="flex: 1;">
+                        <h5 class="card-title" style="font-size: 1.25rem;">@card.name</h5>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-house-door"></i> @card.address</p>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-briefcase"></i> @card.occupation</p>
                     </div>
                 </div>
+            </div>
             }
         }
         else
@@ -37,84 +39,9 @@
 @code {
     private List<CardDto> cards;
 
-    protected override async Task OnInitializedAsync()
+      protected override async Task OnInitializedAsync()
     {
-        cards = new List<CardDto>
-        {
-            new CardDto
-            {
-                id = 1,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "John Doe",
-                address = "123 Main St",
-                occupation = "Software Developer",
-                description = "Experienced developer in ASP.NET Core.",
-                latitude = 40.7128,
-                longitude = 74.0060
-            },
-            new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 40.4093,
-                longitude =49.8671
-            },new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 34.0522,
-                longitude = -118.2437
-            },new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 34.0522,
-                longitude = -118.2437
-            },new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 34.0522,
-                longitude = -118.2437
-            },new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 34.0522,
-                longitude = -118.2437
-            },new CardDto
-            {
-                id = 2,
-                imgPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DW2AbPjiyr_z8wPldURnj7pUcyca6F0GrA&s",
-                name = "Jane Smith",
-                address = "456 Elm St",
-                occupation = "Graphic Designer",
-                description = "Creative designer with a passion for graphics.",
-                latitude = 34.0522,
-                longitude = -118.2437
-            }
-            // Add more cards as needed
-        };
+         cards = await HttpClient.GetFromJsonAsync<List<CardDto>>("http://localhost:5026/api/Card");
     }
 
     private void NavigateToDetails(int id)
