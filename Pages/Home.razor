@@ -1,5 +1,171 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Welcome</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container my-5">
+    <div class="row text-center">
+        <h1 class="display-4 animate__animated animate__fadeInDown">Welcome to UCARE</h1>
+        <p class="lead animate__animated animate__fadeInUp">Discover amazing places like barbershops, restaurants, museums, snack bars, and more!</p>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp" class="card-img-top img-hover" alt="Barbershop" />
+                <div class="card-body">
+                    <h5 class="card-title">Barbershops</h5>
+                    <p class="card-text">Find the best barbershops in your area for a fresh new look.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://media.cnn.com/api/v1/images/stellar/prod/190710135245-12-waterfront-restaurants.jpg?q=w_3498,h_2296,x_0,y_0,c_fill" class="card-img-top img-hover" alt="Restaurant" />
+                <div class="card-body">
+                    <h5 class="card-title">Restaurants</h5>
+                    <p class="card-text">Explore top-rated restaurants offering a variety of cuisines.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2020/11/header2.jpg?fit=1300%2C731&ssl=1" class="card-img-top img-hover" alt="Museum" />
+                <div class="card-body">
+                    <h5 class="card-title">Museums</h5>
+                    <p class="card-text">Discover fascinating museums with captivating exhibitions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="row my-5">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://images.squarespace-cdn.com/content/v1/65a8583b3f2bb32732bff587/63ff3986-3c95-4422-bdaa-6a373b71140d/Custom-Luxury-Home-Dallas.jpg" class="card-img-top img-hover" alt="Barbershop" />
+                <div class="card-body">
+                 <h5 class="card-title">Rental apartments</h5>
+                 <p class="card-text">Explore a wide selection of comfortable and modern apartments tailored to your lifestyle.</p>    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg" class="card-img-top img-hover" alt="Restaurant" />
+                <div class="card-body">
+                   <h5 class="card-title">Gyms</h5>
+                   <p class="card-text">Achieve your fitness goals by finding the best gyms equipped with modern facilities and professional trainers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg animate__animated animate__zoomIn">
+                <img src="https://dailycoffeenews.com/wp-content/uploads/2018/10/coffee-801781_1280.jpg" class="card-img-top img-hover" alt="Museum" />
+                <div class="card-body">
+                    <h5 class="card-title">Cafés</h5>
+                    <p class="card-text">Find cozy cafés serving freshly brewed coffee, delicious pastries, and a relaxing ambiance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="text-center my-5">
+        <a href="/cards" class="btn custom-btn shadow-lg animate__animated animate__fadeInUp">
+            <span>Explore More Places</span>
+        </a>
+    </div>
+
+</div>
+
+<style>
+    .img-hover {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .img-hover:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .card {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .animate__animated {
+        animation-duration: 1s;
+        animation-delay: 0.2s;
+    }
+
+    .navigate-btn {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .navigate-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+   .custom-btn {
+        border: 2px solid black;
+        background-color: transparent;
+        color: black;
+        font-size: 1.25rem;
+        padding: 10px 30px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        transition: color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+    }
+
+    .custom-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        transition: left 0.4s ease-in-out;
+        z-index: -1;
+    }
+
+    .custom-btn:hover::before {
+        left: 0;
+    }
+
+    .custom-btn:hover {
+        color: white;
+        border-color: black;
+    }
+
+    .custom-btn span {
+        position: relative;
+        display: inline-block;
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .custom-btn::after {
+        content: "Get Started →";
+        position: absolute;
+        top: 50%;
+        left: 170%;
+        width: 100%;
+        transform: translateX(-2%) translateY(-50%);
+        color: white;
+        background-color: black;
+        padding: 10px 20px;
+        border: 2px solid black;
+        border-radius: 5px;
+        transition: left 0.4s ease-in-out;
+        white-space: nowrap;
+    }
+
+    .custom-btn:hover::after {
+        left: 10px;
+    }
+</style>

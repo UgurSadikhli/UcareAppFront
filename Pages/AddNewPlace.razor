@@ -83,6 +83,8 @@ else
         {
             var latString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLat");
             var lngString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLng");
+            var email = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "email");
+
             double lat = 0;
             double lng = 0;
             if (!string.IsNullOrEmpty(latString) && double.TryParse(latString, out lat) &&
@@ -90,6 +92,7 @@ else
             {
                 Card.latitude = lat;
                 Card.longitude = lng;
+                Card.UserEmail = email;
             }
             else
             {
