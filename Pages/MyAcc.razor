@@ -1,0 +1,134 @@
+@page "/profile"
+@using System.Net.Http.Json
+@using UcareAppFront.DTOs
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Profile Settings</PageTitle>
+
+<style>
+    .profile-card {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .profile-card img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+    .profile-card h5 {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .profile-card span {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .icon {
+        margin-right: 8px;
+        color: #6c757d;
+    }
+
+    .form-control {
+        border-radius: 30px;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        border-radius: 30px;
+    }
+</style>
+
+<div class="profile-card">
+     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQdztTDcpZ2pFqwWDYwSXbvZq5nzJYg5cn8w&s" alt="Profile Image" /> 
+
+
+    <h5>@name</h5>
+    <span><i class="fas fa-envelope icon"></i>@email</span>
+    <span><i class="fas fa-user-tag icon"></i>@role</span>
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Update Name" @bind="neWname"/>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Update Email" @bind="neWemail" />
+        </div>
+        @* <div class="form-group">
+            <select class="form-control">
+                <option>Update Role</option>
+                <option>User</option>
+                <option>Admin</option>
+            </select>
+        </div> *@
+        <button type="submit" class="btn btn-primary btn-block" @onclick="SaveChanges">Save Changes</button>
+    </form>
+</div>
+
+@code {
+    string name = string.Empty;
+    string email = string.Empty;
+    string role = string.Empty;
+    string password = string.Empty;
+    bool isAuthenticated;
+
+    private string neWname = string.Empty;
+    private string neWemail = string.Empty;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        name = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "name");
+        email = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "email");
+        role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
+    
+       var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
+        neWname= name;
+        neWemail=email;
+
+        if (!isAuthenticated)
+        {
+            NavigationManager.NavigateTo("/cards");
+            return;
+        }
+    }
+
+
+
+    private async Task SaveChanges()
+    {
+        var updateProfilePayload = new
+        {
+            Name = neWname,
+            Email = neWemail,
+        };
+
+        var response = await Http.PutAsJsonAsync($"/api/user/update-profile", updateProfilePayload);
+        if (response.IsSuccessStatusCode)
+        {
+           JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", "name", neWname);
+           JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", "email", neWemail);
+            await JSRuntime.InvokeVoidAsync("showAlert", "User data changed successfully");
+            await JSRuntime.InvokeVoidAsync("location.reload");
+
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("showAlert", "User data couldn't be changed");           
+        }
+    }
+  
+}

@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets/icon-192.png"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/icons8-google-web-search-120.png",
+      "PackagePath": "staticwebassets/icons8-google-web-search-120.png"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/index.html",
       "PackagePath": "staticwebassets/index.html"
     },

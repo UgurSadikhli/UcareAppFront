@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/nix7aJRy+rZdF3zH5cbEQJ/WgukIVNiKp17Ht7iIpU=",
+  "Hash": "OeVNhyFxvML0BVb9a+N3zxKVAytPTqZCw5bsKFHmRNI=",
   "Source": "UcareAppFront",
   "BasePath": "/",
   "Mode": "Root",
@@ -7995,6 +7995,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/icon-192.png"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/icons8-google-web-search-120.png",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "icons8-google-web-search-120.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/icons8-google-web-search-120.png"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/index.html",

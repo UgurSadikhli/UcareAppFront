@@ -47,7 +47,7 @@
 </style>
 
 @code {
-    private List<CardDto> allCards; // Replace with your actual data source
+    private List<CardDto> allCards;
     private List<CardDto> favoriteCards;
     private bool isFavorite;
     private string favoriteButtonClass = "btn-outline-primary";
@@ -55,7 +55,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Load all cards and favorite cards
+    
             allCards = await HttpClient.GetFromJsonAsync<List<CardDto>>("http://localhost:5026/api/Card");
 
         var favorites = await GetFavoriteCards();
