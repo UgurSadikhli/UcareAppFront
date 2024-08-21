@@ -1,8 +1,11 @@
 @page "/add-new-place"
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
+@inject HttpClient HttpClient
+@using System.Net.Http.Json
 @using UcareAppFront.DTOs
 @inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components.Routing
 
 @if (isAuthenticated)
 {
@@ -79,12 +82,26 @@ else
 
     private async Task CreatePlace()
     {
+
+
         try
         {
+            var cardsArr = await HttpClient.GetFromJsonAsync<List<CardDto>>("http://localhost:5026/api/Card");
+         
+            var isMultiple = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "isMultiple");
+
             var latString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLat");
             var lngString = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "mapLng");
             var email = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "email");
-
+            if(isMultiple == "true"){
+            foreach(var i in cardsArr){
+                if(i.UserEmail == email ){
+                    await JSRuntime.InvokeVoidAsync("showAlert", $"Failed to create card, you already have place '{i.name}'");
+                    Navigation.NavigateTo("/cards"); 
+                    return;
+                }
+            }
+            }
             double lat = 0;
             double lng = 0;
             if (!string.IsNullOrEmpty(latString) && double.TryParse(latString, out lat) &&

@@ -65,6 +65,12 @@
         <div class="form-group">
             <input type="email" class="form-control" placeholder="Update Email" @bind="neWemail" />
         </div>
+        @if(isAdmin){
+        <diV>
+            <span>Allow multiple places</span>
+            <input type="checkbox"   @bind="IsChecked" onclick="@CheckHandler"/>
+        </diV>
+        }
         @* <div class="form-group">
             <select class="form-control">
                 <option>Update Role</option>
@@ -80,19 +86,27 @@
     string name = string.Empty;
     string email = string.Empty;
     string role = string.Empty;
+    private bool isAdmin =false;
+
     string password = string.Empty;
     bool isAuthenticated;
 
     private string neWname = string.Empty;
     private string neWemail = string.Empty;
-
+    private bool IsChecked ;
 
 
     protected override async Task OnInitializedAsync()
     {
+         var role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
+        if(role=="admin" ){
+            isAdmin = true;
+        }
         name = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "name");
         email = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "email");
         role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
+        var IsChecked2= await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "isMultiple");
+             IsChecked = IsChecked2 == "false";
     
        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
         isAuthenticated = !string.IsNullOrEmpty(token);
@@ -106,6 +120,10 @@
         }
     }
 
+    private async Task CheckHandler(){
+         await JSRuntime.InvokeAsync<string>("localStorageHelper.setItem", "isMultiple", IsChecked);
+
+    }
 
 
     private async Task SaveChanges()
