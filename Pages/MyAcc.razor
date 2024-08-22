@@ -57,7 +57,7 @@
 
     <h5>@name</h5>
     <span><i class="fas fa-envelope icon"></i>@email</span>
-    <span><i class="fas fa-user-tag icon"></i>@role</span>
+    <span class="role"><i class="fas fa-user-tag icon"></i>@role</span>
     <form>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Update Name" @bind="neWname"/>
@@ -66,7 +66,7 @@
             <input type="email" class="form-control" placeholder="Update Email" @bind="neWemail" />
         </div>
         @if(isAdmin){
-        <diV>
+        <div class="checkdiv">
             <span>Allow multiple places</span>
             <input type="checkbox"   @bind="IsChecked" onclick="@CheckHandler"/>
         </diV>
@@ -81,7 +81,23 @@
         <button type="submit" class="btn btn-primary btn-block" @onclick="SaveChanges">Save Changes</button>
     </form>
 </div>
+<style>
+    .role{
+        color: red;
+    }
 
+    .checkdiv{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        margin-left: 2px;
+    }
+    .checkdiv span{
+        font-size: small;
+    }
+
+</style>
 @code {
     string name = string.Empty;
     string email = string.Empty;
@@ -98,7 +114,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-         var role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
+          role = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "role");
         if(role=="admin" ){
             isAdmin = true;
         }
@@ -122,6 +138,13 @@
 
     private async Task CheckHandler(){
          await JSRuntime.InvokeAsync<string>("localStorageHelper.setItem", "isMultiple", IsChecked);
+            if(!IsChecked){
+             await JSRuntime.InvokeVoidAsync("showAlert", "Now everyone can post more than one place");
+            }
+            else{
+             await JSRuntime.InvokeVoidAsync("showAlert", "Now everyone can post only one place");
+            }
+
 
     }
 

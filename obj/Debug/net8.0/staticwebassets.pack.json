@@ -49,6 +49,10 @@
       "PackagePath": "staticwebassets/js/alert.js"
     },
     {
+      "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/allMarksMap.js",
+      "PackagePath": "staticwebassets/js/allMarksMap.js"
+    },
+    {
       "Id": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/jwtHelper.js",
       "PackagePath": "staticwebassets/js/jwtHelper.js"
     },

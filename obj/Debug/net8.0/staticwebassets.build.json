@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OeVNhyFxvML0BVb9a+N3zxKVAytPTqZCw5bsKFHmRNI=",
+  "Hash": "bxbBYmXthqMmlRsAmrfAA1BevjSrvOSx/5iw0S9HyIc=",
   "Source": "UcareAppFront",
   "BasePath": "/",
   "Mode": "Root",
@@ -8052,6 +8052,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/alert.js"
+    },
+    {
+      "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/allMarksMap.js",
+      "SourceId": "UcareAppFront",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "js/allMarksMap.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/allMarksMap.js"
     },
     {
       "Identity": "/Users/ugursadixli/Desktop/UcareAppFront/wwwroot/js/jwtHelper.js",

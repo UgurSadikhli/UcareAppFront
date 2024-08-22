@@ -76,6 +76,7 @@
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "email");
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "mapLng");
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "mapLat");
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "favorites");
         isAuthenticated = false; 
         await JSRuntime.InvokeVoidAsync("location.reload");
 
