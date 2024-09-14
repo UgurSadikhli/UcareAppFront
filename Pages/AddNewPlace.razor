@@ -13,37 +13,37 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <img src="@Card.imgPath" style="height: 30vh;" alt="@Card.name" />
+                    <img src="@Card.ImgPath" style="height: 30vh;" alt="@Card.Name" />
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">
                                 <i class="bi bi-person-vcard"></i> Name
                             </label>
-                            <input type="text" class="form-control" id="name" @bind="Card.name" />
+                            <input type="text" class="form-control" id="name" @bind="Card.Name" />
                         </div>
                         <div class="form-group">
                             <label for="address">
                                 <i class="bi bi-house-door"></i> Address
                             </label>
-                            <input type="text" class="form-control" id="address" @bind="Card.address" />
+                            <input type="text" class="form-control" id="address" @bind="Card.Address" />
                         </div>
                         <div class="form-group">
                             <label for="occupation">
                                 <i class="bi bi-briefcase"></i> Occupation
                             </label>
-                            <input type="text" class="form-control" id="occupation" @bind="Card.occupation" />
+                            <input type="text" class="form-control" id="occupation" @bind="Card.Occupation" />
                         </div>
                         <div class="form-group">
                             <label for="description">
                                 <i class="bi bi-file-text"></i> Description
                             </label>
-                            <textarea class="form-control" id="description" rows="3" @bind="Card.description"></textarea>
+                            <textarea class="form-control" id="description" rows="3" @bind="Card.Description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="imgUrl">
                                 <i class="bi bi-image"></i> Image URL
                             </label>
-                            <input type="text" class="form-control" id="imgUrl" @bind="Card.imgPath" />
+                            <input type="text" class="form-control" id="imgUrl" @bind="Card.ImgPath" />
                         </div>
                     </div>
                     <button class="btn btn-primary" @onclick="CreatePlace">Create</button>
@@ -63,8 +63,8 @@ else
 @code {
     private CardDto Card = new CardDto
     {
-        latitude = 40,
-        longitude = 49
+        Latitude = 40,
+        Longitude = 49
     };
 
     private bool isAuthenticated = false;
@@ -96,7 +96,7 @@ else
             if(isMultiple == "true"){
             foreach(var i in cardsArr){
                 if(i.UserEmail == email ){
-                    await JSRuntime.InvokeVoidAsync("showAlert", $"Failed to create card, you already have place '{i.name}'");
+                    await JSRuntime.InvokeVoidAsync("showAlert", $"Failed to create card, you already have place '{i.Name}'");
                     Navigation.NavigateTo("/cards"); 
                     return;
                 }
@@ -107,9 +107,10 @@ else
             if (!string.IsNullOrEmpty(latString) && double.TryParse(latString, out lat) &&
                 !string.IsNullOrEmpty(lngString) && double.TryParse(lngString, out lng))
             {
-                Card.latitude = lat;
-                Card.longitude = lng;
+                Card.Latitude = lat;
+                Card.Longitude = lng;
                 Card.UserEmail = email;
+            
             }
             else
             {
@@ -125,6 +126,7 @@ else
             }
             else
             {
+                 @* Console.WriteLine(Card.UserEmail); *@
                 await JSRuntime.InvokeVoidAsync("showAlert", "Failed to create card.");
             }
         }
@@ -139,7 +141,7 @@ else
 
             try
             {
-                await JSRuntime.InvokeVoidAsync("initializeMap2", Card.latitude, Card.longitude);
+                await JSRuntime.InvokeVoidAsync("initializeMap2", Card.Latitude, Card.Longitude);
             }
             catch (Exception ex)
             {

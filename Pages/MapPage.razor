@@ -44,7 +44,7 @@
             try
             {
                 Console.WriteLine("Calling initializeMap4 with places.");
-                await JSRuntime.InvokeVoidAsync("initializeMap4", Places[0].latitude, Places[0].longitude, Places);
+                await JSRuntime.InvokeVoidAsync("initializeMap4", Places[0].Latitude, Places[0].Longitude, Places);
             }
             catch (Exception ex)
             {

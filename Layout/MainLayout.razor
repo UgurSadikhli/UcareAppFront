@@ -2,12 +2,11 @@
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
 <div class="page">
-    @if (Navigation.Uri != Navigation.BaseUri)
-    {
+
     <div class="sidebar">
         <NavMenu />
     </div>
-    }
+    
     <main style="background-color: #EEEEEE;">
         @if (Navigation.Uri != Navigation.BaseUri)
         {

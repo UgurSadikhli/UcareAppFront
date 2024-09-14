@@ -29,6 +29,17 @@
             <button type="submit" class="btn btn-primary w-100">Login</button>
             <p style="font-size: smaller; margin-top: 4px;">don't have account? <a href="/register">register</a></p>
 
+            @if (errorMessages?.Count > 0)
+            {
+                <div class="mt-3" style="color: red;">
+                    <ul>
+                        @foreach (var errorMessage in errorMessages)
+                        {
+                            <li>@errorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
         </EditForm>
     </div>
 </div>
@@ -40,10 +51,22 @@
     private string userName = string.Empty;
     private string userEmail = string.Empty;
     private string token = string.Empty;
+    private List<string> errorMessages = new List<string>();
 
     private async Task HandleLogin()
     {
-        var apiUrl = "http://localhost:5026/api/Auth/login";
+        errorMessages.Clear();
+        
+        if (string.IsNullOrWhiteSpace(loginModel.Email))
+            errorMessages.Add("Email is required.");
+        
+        if (string.IsNullOrWhiteSpace(loginModel.Password))
+            errorMessages.Add("Password is required.");
+
+        if (errorMessages.Count > 0)
+            return;
+
+        var apiUrl = "http://localhost:5026/api/Identity/login";
         var response = await Http.PostAsJsonAsync(apiUrl, loginModel);
 
         if (response.IsSuccessStatusCode)
@@ -73,6 +96,7 @@
         else
         {
             Console.WriteLine("Login failed");
+            errorMessages.Add("Login failed, Email or Password are incorrect");
         }
     }
 

@@ -14,14 +14,14 @@
             @foreach (var card in cards)
             {
                 <div class="col-md-3 mb-4">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;"  @onclick="() => NavigateToDetails(card.id)">
-                    <img src="@card.imgPath" 
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;"  @onclick="() => NavigateToDetails(card.Id)">
+                    <img src="@card.ImgPath" 
                          style="object-fit: cover; height: 200px; width: 100%;" 
-                         alt="@card.name" />
+                         alt="@card.Name" />
                     <div class="card-body" style="flex: 1;">
-                        <h5 class="card-title" style="font-size: 1.25rem;">@card.name</h5>
-                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-house-door"></i> @card.address</p>
-                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-briefcase"></i> @card.occupation</p>
+                        <h5 class="card-title" style="font-size: 1.25rem;">@card.Name</h5>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-house-door"></i> @card.Address</p>
+                        <p class="card-text" style="font-size: 0.875rem;"><i class="bi bi-briefcase"></i> @card.Occupation</p>
                     </div>
                 </div>
             </div>

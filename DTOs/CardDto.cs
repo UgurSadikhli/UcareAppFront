@@ -2,14 +2,14 @@ namespace UcareAppFront.DTOs
 {
 public class CardDto
 {
-    public int id { get; set; }
-    public string imgPath { get; set; }
-    public string name { get; set; }
-    public string address { get; set; }
-    public string occupation { get; set; }
-    public string description { get; set; }
-    public double latitude { get; set; }
-    public double longitude { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public string Occupation { get; set; }
+    public string Description { get; set; }
+    public string ImgPath { get; set; }
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
     public string UserEmail { get; set; }
 }
 }

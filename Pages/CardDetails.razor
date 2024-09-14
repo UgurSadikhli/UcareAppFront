@@ -16,10 +16,10 @@
             @if (card != null)
             {
                 <div class="card">
-                    <img src="@card.imgPath" class="card-img-top img-custom" alt="@card.name" />
+                    <img src="@card.ImgPath" class="card-img-top img-custom" alt="@card.Name" />
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">@card.name</h4>
+                            <h4 class="card-title">@card.Name</h4>
                             <div>
                             <button class="btn @favoriteButtonClass" style="margin-right: 2px;" @onclick="ToggleFavorite">
                                 <i class="bi @favoriteIcon"></i>
@@ -37,12 +37,12 @@
                            
                             </div>
                         </div>
-                        <p class="card-text"><i class="bi bi-house-door"></i> @card.address</p>
-                        <p class="card-text"><i class="bi bi-briefcase"></i> @card.occupation</p>
+                        <p class="card-text"><i class="bi bi-house-door"></i> @card.Address</p>
+                        <p class="card-text"><i class="bi bi-briefcase"></i> @card.Occupation</p>
                         <div style="max-height: 3.5em; display: flex; flex-direction: row; gap: 4px;">
                         <i class="bi bi-file-text"></i> 
                         <div style="overflow-y: auto; max-height: 3em;">
-                             @card.description
+                             @card.Description
                          </div>
                          </div>
                     </div>
@@ -85,7 +85,7 @@
 
 
                 var favorites = await GetFavoriteCards();
-                isFavorite = favorites.Contains(card.id);
+                isFavorite = favorites.Contains(card.Id);
                 var email = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", "email");
 
                 if(email == card.UserEmail){
@@ -110,11 +110,11 @@
         var favorites = await GetFavoriteCards();
         if (isFavorite)
         {
-            favorites.Remove(card.id);
+            favorites.Remove(card.Id);
         }
         else
         {
-            favorites.Add(card.id);
+            favorites.Add(card.Id);
         }
         await SaveFavoriteCards(favorites);
         isFavorite = !isFavorite;
@@ -177,7 +177,7 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
             try{
-                await JSRuntime.InvokeVoidAsync("initializeMap", card.latitude, card.longitude, card.name);
+                await JSRuntime.InvokeVoidAsync("initializeMap", card.Latitude, card.Longitude, card.Name);
             }
             catch (Exception ex)
             {
